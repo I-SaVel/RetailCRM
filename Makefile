@@ -12,3 +12,6 @@ bash:
 
 log:
 	docker compose logs -f --tail 100
+
+clear:
+	docker system prune -a

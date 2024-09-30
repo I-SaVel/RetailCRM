@@ -1,4 +1,5 @@
 import asyncio
+import json
 import os
 from typing import Optional, Dict
 
@@ -35,12 +36,12 @@ async def get_customers_service(query_params: Optional[Dict[str, str]] = None):
         return responses
 
 
-async def post_customers(client, url, params, json):
-    response = await client.post(url, params=params, json=json)
+async def post_customers(client, url, params, form_data):
+    response = await client.post(url, params=params, data=form_data)
     return response.json()
 
 
-async def post_customers_service(json):
+async def post_customers_service(data):
     async with httpx.AsyncClient() as client:
         tasks = []
         endpoint = "customers/create"
@@ -48,7 +49,13 @@ async def post_customers_service(json):
         params = {
             "apiKey": api_key
         }
-        tasks.append(asyncio.create_task(post_customers(client, url, params, json)))
+        form_data = {}
+        for key, value in data.items():
+            if isinstance(value, (dict, list)):
+                form_data[key] = json.dumps(value)
+            else:
+                form_data[key] = value
+        tasks.append(asyncio.create_task(post_customers(client, url, params, form_data)))
         responses = await asyncio.gather(*tasks)
         return responses
 
@@ -72,12 +79,12 @@ async def get_orders_service(id):
         return responses
 
 
-async def post_orders(client, url, params, json):
-    response = await client.get(url, params=params, json=json)
+async def post_orders(client, url, params, form_data):
+    response = await client.get(url, params=params, data=form_data)
     return response.json()
 
 
-async def post_orders_service(json):
+async def post_orders_service(data):
     async with httpx.AsyncClient() as client:
         tasks = []
         endpoint = "orders/create"
@@ -85,6 +92,12 @@ async def post_orders_service(json):
         params = {
             "apiKey": api_key
         }
-        tasks.append(asyncio.create_task(post_orders(client, url, params, json)))
+        form_data = {}
+        for key, value in data.items():
+            if isinstance(value, (dict, list)):
+                form_data[key] = json.dumps(value)
+            else:
+                form_data[key] = value
+        tasks.append(asyncio.create_task(post_orders(client, url, params, form_data)))
         responses = await asyncio.gather(*tasks)
         return responses

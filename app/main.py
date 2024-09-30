@@ -22,8 +22,7 @@ async def get_customers(request: Request):
 
 @app.post("/customers")
 async def create_customer(data: Dict):
-    json_data = json.dumps(data)
-    response = await post_customers_service(json_data)
+    response = await post_customers_service(data)
     return response
 
 @app.get("/orders/{id}")
@@ -33,6 +32,5 @@ async def get_orders(id:str):
 
 @app.post("/orders")
 async def create_order(data: Dict):
-    json_data = json.dumps(data)
-    response = await post_orders_service(json_data)
+    response = await post_orders_service(data)
     return response

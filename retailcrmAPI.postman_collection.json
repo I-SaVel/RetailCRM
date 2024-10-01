@@ -106,6 +106,15 @@
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"site\": \"savelevignat44\",\n    \"order\": {\n        \"externalId\": \"a123\",\n        \"firstName\": \"Tom\",\n        \"lastName\": \"Smith\",\n        \"email\": \"tom.smith@example.com\",\n        \"phone\": \"+123456789\",\n        \"items\": [\n            {\n                \"productId\": 1,\n                \"quantity\": 2\n            }\n        ],\n        \"delivery\": {\n            \"address\": {\n                \"countryIso\": \"US\",\n                \"region\": \"California\",\n                \"city\": \"Los Angeles\",\n                \"street\": \"Main St\",\n                \"building\": \"1\",\n                \"flat\": \"101\"\n            }\n        }\n    }\n}\n\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "http://0.0.0.0:8000/orders/",
 					"protocol": "http",

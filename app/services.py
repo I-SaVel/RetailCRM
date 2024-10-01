@@ -11,7 +11,7 @@ api_key = os.getenv("API_KEY")
 subdomain = os.getenv("YOUR_SUBDOMAIN")
 version = os.getenv("VERSION")
 
-base_url = base_url = f"https://{subdomain}.retailcrm.ru/api/{version}/"
+base_url = f"https://{subdomain}.retailcrm.ru/api/{version}/"
 
 
 async def get_customers(client, url, params):
@@ -80,7 +80,7 @@ async def get_orders_service(id):
 
 
 async def post_orders(client, url, params, form_data):
-    response = await client.get(url, params=params, data=form_data)
+    response = await client.post(url, params=params, data=form_data)
     return response.json()
 
 
